@@ -1,5 +1,5 @@
 var app = {
-  server: 'http://127.0.0.1:3000/chatterbox/classes/messages',
+  server: 'http://127.0.0.1:3000/classes/messages',
   roomStorage: [],
   messageStorage: [],
   friendsList: []
@@ -23,7 +23,6 @@ app.send = function(message) {
     contentType: 'application/json',
     success: function (data) {
       console.log('chatterbox: Message sent');
-
       app.fetch();
     },
     error: function (data) {
@@ -46,6 +45,8 @@ app.fetch = function() {
     // data: {'order':'-createdAt'},
     limit: 200,
     success: function (data) {
+      app.clearMessages();
+
       data.results.forEach(function(message) {
         app.messageStorage.push(message);
       }.bind(app));
@@ -75,6 +76,7 @@ app.fetch = function() {
 
 app.clearMessages = function() {
   $('#chats').empty();
+  app.messageStorage = [];
 };
 
 
