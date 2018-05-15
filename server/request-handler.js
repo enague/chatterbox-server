@@ -21,7 +21,7 @@ var defaultCorsHeaders = {
   'access-control-max-age': 10 // Seconds.
 };
 
-module.exports = function(request, response) {
+requestHandler = function(request, response) {
   // Request and Response come from node's http module.
   //
   // They include information about both the incoming request, such as
@@ -74,7 +74,7 @@ module.exports = function(request, response) {
   // which includes the status and all headers.
   response.writeHead(statusCode, headers);
 
-  var responseBody = { headers, method, url, results };
+  var responseBody = { headers, method, url, results, statusCode };
   console.log(responseBody);
 
   // Make sure to always call response.end() - Node may not send
@@ -97,3 +97,4 @@ module.exports = function(request, response) {
 // Another way to get around this restriction is to serve you chat
 // client from this domain by setting up static file serving.
 
+module.exports.requestHandler = requestHandler;
