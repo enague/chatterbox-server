@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 var results = [];
 
 var defaultCorsHeaders = {
@@ -8,6 +10,17 @@ var defaultCorsHeaders = {
 };
 
 var requestHandler = function(request, response) {
+  // var html = fs.readFileSync('./client/index.html')
+
+  //   //, function(err, data) {
+  //   //console.log(data);  
+  //   // response.write(data);
+  //   // response.end();
+  //   // if (err) throw err;
+  // //});
+
+  // console.log(html);
+
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
 
   var headers = request.headers;
@@ -24,6 +37,28 @@ var requestHandler = function(request, response) {
   headers['Content-Type'] = 'application/json';
   var statusCode = codes[request.method];
   response.writeHead(statusCode, headers);
+
+  if (request.url === '/') {
+    var html = fs.readFileSync('./client/index.html');
+    
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.write(html);
+
+
+    // response.writeHead(200, {'Content-Type': 'text/html'});
+    // fs.readFileSync('./client/index.html', null, function (error, data) {
+    //   response.write(data)
+    // });
+
+    response.end();
+  } else if (request.url === '/styles/styles.css') {
+    var css = fs.readFileSync('./client/styles/styles.css');
+
+    response.writeHead(200, {'Content-Type': 'text/css'});
+    response.write(css);
+
+    response.end();
+  }
 
   if (request.method === 'POST' && request.url === '/classes/messages') {
     request.on('data', (chunk) => {

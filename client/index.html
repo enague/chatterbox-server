@@ -6,11 +6,14 @@
     <link rel="stylesheet" href="styles/styles.css">
 
     <!-- dependencies -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/DOMPurify/dist/purify.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
-    <script>
+<!--     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
         var newSearch = window.location.search;
@@ -20,7 +23,7 @@
         newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
         window.location.search = newSearch;
       }
-    </script>
+    </script> -->
     <!-- your scripts -->
     <script src="scripts/dynamic.js"></script>
     <script src="scripts/app.js"></script>

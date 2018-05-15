@@ -95,7 +95,7 @@ app.renderMessage = function(message) {
   }
 
   if (!DOMPurify.sanitize(message.text)) {
-    message.text = 'Natalie & Daryl were here';
+    message.text = ' ';
   }  
 
   $name.text(DOMPurify.sanitize(message.username));
