@@ -23,7 +23,17 @@ var ip = '127.0.0.1';
 var handleRequest = require('./request-handler.js');
 //
 // After creating the server, we will tell it to listen on the given port and IP. */
-var server = http.createServer(handleRequest.requestHandler);
+var server = http.createServer(function(request, response) {
+  console.log('Serving request type ' + request.method + ' for url ' + request.url);
+  if(request.url === '/classes/messages') {
+    handleRequest.requestHandler(request, response);
+  } else {
+    statusCode = 404;
+    response.writeHead(statusCode, headers);
+    response.end();
+  }
+
+});
 console.log('Listening on http://' + ip + ':' + port);
 server.listen(port, ip, () => {
   console.log(`Server running at http://${ip}:${port}`);
